@@ -1,4 +1,4 @@
-document.getElementById('signin-form').addEventListener('submit', function (e) {
+document.getElementById('sign-in-form').addEventListener('submit', function (e) {
   e.preventDefault();
   let username = document.getElementById('username').value;
   let password = document.getElementById('password').value;
@@ -8,10 +8,14 @@ document.getElementById('signin-form').addEventListener('submit', function (e) {
 
   if (user) {
     if (rememberMe) {
-      localStorage.setItem('rememberMe', 'true');
+      // localStorage.setItem('rememberMe', 'true');
+      localStorage.setItem('rememberMe', JSON.stringify(true)); 
+
       localStorage.setItem('currentUser', JSON.stringify(user));
     } else {
-      localStorage.setItem('rememberMe', 'false');
+      // localStorage.setItem('rememberMe', 'false');
+      localStorage.setItem('rememberMe', JSON.stringify(false));
+
       sessionStorage.setItem('currentUser', JSON.stringify(user));
     }
     window.location.href = '../HTML/main.html';
@@ -20,17 +24,18 @@ document.getElementById('signin-form').addEventListener('submit', function (e) {
   }
 });
 
-document.getElementById('signup-button').addEventListener('click', function () {
+document.getElementById('sign-up-button').addEventListener('click', function () {
   
   window.location.href = '../HTML/signUp.html';
 });
 
 function checkRememberMe() {
-  if (localStorage.getItem('rememberMe') === 'true') {
+  // if (localStorage.getItem('rememberMe') === 'true') {
+    if (localStorage.getItem('rememberMe') === JSON.stringify(true)) {
     window.location.href = '../HTML/main.html';
   }
 }
 checkRememberMe();
-if (sessionStorage.getItem('currentUser')) {
+if (sessionStorage.getItem('currentUser')) {  
   window.location.href = '../HTML/main.html';
 }

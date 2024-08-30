@@ -1,11 +1,11 @@
-document.getElementById('signup-form').addEventListener('submit', function (e) {
+document.getElementById('sign-up-form').addEventListener('submit', function (e) {
   e.preventDefault();
-  let username = document.getElementById("username").value;
-  let password = document.getElementById("password").value;
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  let userExists = users.some((user) => user.username === username);
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  const isUserExists = users.some((user) => user.username === username);
 
-  if (userExists) {
+  if (isUserExists) {
     alert("Username already exists. Please choose a different username.");
   } else {
     users.push({ username: username, password: password });
@@ -14,7 +14,7 @@ document.getElementById('signup-form').addEventListener('submit', function (e) {
     window.location.href = "../HTML/signIn.html";
   }
 });
-document.getElementById("signin-button").addEventListener("click", function () {
+document.getElementById("sign-in-button").addEventListener("click", function () {
   window.location.href = '../HTML/signIn.html';
 });
 function checkLoggedIn() {
