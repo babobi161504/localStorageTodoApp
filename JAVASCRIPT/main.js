@@ -5,10 +5,10 @@ function checkLoggedIn() {
   if (!user) {
     window.location.href = "../HTML/main.html";
   } else {
-    user = JSON.parse(user);
+    const userJson = JSON.parse(user);
     document.getElementById(
       "welcome-message"
-    ).textContent = `Hello ${user.username}. You are logged in`;
+    ).textContent = `Hello ${userJson.username}. You are logged in`;
   }
 }
 document.getElementById("logout-button").addEventListener("click", function () {
@@ -18,23 +18,9 @@ document.getElementById("logout-button").addEventListener("click", function () {
   window.location.href = "../HTML/signIn.html";
 });
 
-function checkLoggedIn() {
-  let user =
-    localStorage.getItem("currentUser") ||
-    sessionStorage.getItem("currentUser");
-  if (!user) {
-    window.location.href = "../HTML/signIn.html"; 
-  } else {
-    user = JSON.parse(user);
-    document.getElementById(
-      "welcome-message"
-    ).textContent = `Hello ${user.username}. You are logged in`;
-  }
-}
-
 checkLoggedIn();
 
-// Todo app
+// todoApp
 
 document.addEventListener("DOMContentLoaded", function () {
   const todoInput = document.getElementById("id-todo-input");

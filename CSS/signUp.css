@@ -46,10 +46,10 @@ form button {
 form button:hover {
     background-color: #0056b3;
 }
-#signin-button {
+#sign-in-button {
     background-color: #28a745;
 }
 
-#signin-button:hover {
+#sign-in-button:hover {
     background-color: #218838;
 }
