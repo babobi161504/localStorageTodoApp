@@ -127,7 +127,7 @@
 function checkLoggedIn() {
   const userJson = localStorage.getItem("currentUser") || sessionStorage.getItem("currentUser");
   if (!userJson) {
-    window.location.href = "../HTML/main.html";
+    window.location.href = "../HTML/signIn.html";
   } else {
     const user = JSON.parse(userJson);
     document.getElementById("welcome-message").textContent = `Hello ${user.username}. You are logged in`;
