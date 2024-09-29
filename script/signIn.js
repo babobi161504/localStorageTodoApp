@@ -12,19 +12,19 @@ document
 
     if (user) {
       if (rememberMe) {
-        // localStorage.setItem('rememberMe', 'true');
+        
         localStorage.setItem("rememberMe", JSON.stringify(true));
 
         localStorage.setItem("currentUser", JSON.stringify(user));
       } else {
-        // localStorage.setItem('rememberMe', 'false');
+        
         localStorage.setItem("rememberMe", JSON.stringify(false));
 
         sessionStorage.setItem("currentUser", JSON.stringify(user));
       }
       sessionStorage.setItem("userId", user.userId);
 
-      window.location.href = "../HTML/main.html";
+      window.location.href = "../page/main.html";
     } else {
       alert("Invalid username or password");
     }
@@ -33,16 +33,16 @@ document
 document
   .getElementById("sign-up-button")
   .addEventListener("click", function () {
-    window.location.href = "../HTML/signUp.html";
+    window.location.href = "../page/signUp.html";
   });
 
 function checkRememberMe() {
-  // if (localStorage.getItem('rememberMe') === 'true') {
+
   if (localStorage.getItem("rememberMe") === JSON.stringify(true)) {
-    window.location.href = "../HTML/main.html";
+    window.location.href = "../page/main.html";
   }
 }
 checkRememberMe();
 if (sessionStorage.getItem("currentUser")) {
-  window.location.href = "../HTML/main.html";
+  window.location.href = "../page/main.html";
 }

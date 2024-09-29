@@ -15,12 +15,12 @@
 //   localStorage.removeItem("currentUser");
 //   sessionStorage.removeItem("currentUser");
 //   localStorage.removeItem("rememberMe");
-//   window.location.href = "../HTML/signIn.html";
+//   window.location.href = "../page/signIn.html";
 // });
 
 // checkLoggedIn();
 
-// // todoApp 
+// // todoApp
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   const todoInput = document.getElementById("id-todo-input");
@@ -29,7 +29,6 @@
 //   const filterDropdown = document.querySelector(".filter");
 //   const cancelButton = document.querySelector(".cancel")
 
-  
 //   addButton.addEventListener("click", function () {
 //     const taskName = todoInput.value.trim();
 //     if (taskName !== "") {
@@ -38,7 +37,7 @@
 
 //       const checkbox = document.createElement("input");
 //       checkbox.type = "checkbox";
-      
+
 //       const taskSpan = document.createElement("span");
 //       taskSpan.textContent = taskName;
 
@@ -80,7 +79,7 @@
 //           todoList.appendChild(taskDiv);
 //         } else {
 //           taskDiv.classList.remove('completed')
-          
+
 //         }
 //         filterTasks()
 //       })
@@ -93,7 +92,7 @@
 
 //       todoInput.value = "";
 //       filterTasks();
-    
+
 //     } else if (taskName === '') {
 //       alert('Please input task name before adding a task');
 //     }
@@ -103,7 +102,7 @@
 //   cancelButton.addEventListener("click",function() {
 //     todoInput.value = ''
 //   })
-  
+
 //   // Filter task
 //   function filterTasks() {
 //     const filterValue = filterDropdown.value
@@ -125,12 +124,16 @@
 //   filterDropdown.addEventListener("change", filterTasks)
 // })
 function checkLoggedIn() {
-  const userJson = localStorage.getItem("currentUser") || sessionStorage.getItem("currentUser");
+  const userJson =
+    localStorage.getItem("currentUser") ||
+    sessionStorage.getItem("currentUser");
   if (!userJson) {
-    window.location.href = "../HTML/signIn.html";
+    window.location.href = "../page/signIn.html";
   } else {
     const user = JSON.parse(userJson);
-    document.getElementById("welcome-message").textContent = `Hello ${user.username}. You are logged in`;
+    document.getElementById(
+      "welcome-message"
+    ).textContent = `Hello ${user.username}. You are logged in`;
   }
 }
 
@@ -138,26 +141,26 @@ document.getElementById("logout-button").addEventListener("click", function () {
   localStorage.removeItem("currentUser");
   sessionStorage.removeItem("currentUser");
   localStorage.removeItem("rememberMe");
-  window.location.href = "../HTML/signIn.html";
+  window.location.href = "../page/signIn.html";
 });
 
 checkLoggedIn();
 
 // TodoApp
 document.addEventListener("DOMContentLoaded", function () {
-  const todoInput = document.getElementById("id-todo-input");
-  const addButton = document.getElementById("id-add-button");
-  const todoList = document.getElementById("id-todo-list");
+  const todoInput = document.getElementById("todo-input");
+  const addButton = document.getElementById("add-button");
+  const todoList = document.getElementById("todo-list");
   const filterDropdown = document.querySelector(".filter");
   const cancelButton = document.querySelector(".cancel");
-  
+
   const userId = sessionStorage.getItem("userId");
 
   function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const userTasks = tasks.filter(task => task.ownerId === userId);
+    const userTasks = tasks.filter((task) => task.ownerId === userId);
 
-    userTasks.forEach(task => {
+    userTasks.forEach((task) => {
       addTaskToUI(task);
     });
   }
@@ -166,13 +169,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const taskDiv = document.createElement("div");
     taskDiv.className = "todo-item";
     if (task.isDone) {
-      taskDiv.classList.add('completed');
+      taskDiv.classList.add("completed");
     }
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = task.isDone;
-    
+
     const taskSpan = document.createElement("span");
     taskSpan.textContent = task.name;
 
@@ -214,9 +217,9 @@ document.addEventListener("DOMContentLoaded", function () {
     checkbox.addEventListener("change", function () {
       task.isDone = checkbox.checked;
       if (checkbox.checked) {
-        taskDiv.classList.add('completed');
+        taskDiv.classList.add("completed");
       } else {
-        taskDiv.classList.remove('completed');
+        taskDiv.classList.remove("completed");
       }
       updateTask(task.id, taskSpan.textContent, task.isDone);
       filterTasks();
@@ -231,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateTask(id, name, isDone) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks = tasks.map(task => {
+    tasks = tasks.map((task) => {
       if (task.id === id) {
         return { ...task, name: name, isDone: isDone };
       }
@@ -242,15 +245,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function removeTask(id) {
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    tasks = tasks.filter(task => task.id !== id);
+    tasks = tasks.filter((task) => task.id !== id);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }
 
   addButton.addEventListener("click", function () {
     const taskName = todoInput.value.trim();
     if (taskName !== "") {
-      const taskId = 'task_' + Date.now();
-      const newTask = { id: taskId, name: taskName, isDone: false, ownerId: userId };
+      const taskId = "task_" + Date.now();
+      const newTask = {
+        id: taskId,
+        name: taskName,
+        isDone: false,
+        ownerId: userId,
+      };
 
       addTaskToUI(newTask);
 
@@ -261,30 +269,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
       todoInput.value = "";
       filterTasks();
-    } else if (taskName === '') {
-      alert('Please input task name before adding a task');
+    } else if (taskName === "") {
+      alert("Please input task name before adding a task");
     }
   });
 
   // Cancel input
   cancelButton.addEventListener("click", function () {
-    todoInput.value = '';
+    todoInput.value = "";
   });
 
   // Filter task
   function filterTasks() {
     const filterValue = filterDropdown.value;
-    const tasks = todoList.querySelectorAll('.todo-item');
+    const tasks = todoList.querySelectorAll(".todo-item");
 
-    tasks.forEach(task => {
-      const isCompleted = task.classList.contains('completed');
+    tasks.forEach((task) => {
+      const isCompleted = task.classList.contains("completed");
 
-      if (filterValue === 'all') {
-        task.style.display = 'flex';
-      } else if (filterValue === 'done') {
-        task.style.display = isCompleted ? 'flex' : 'none';
-      } else if (filterValue === 'undone') {
-        task.style.display = isCompleted ? 'none' : 'flex';
+      if (filterValue === "all") {
+        task.style.display = "flex";
+      }
+      if (filterValue === "done") {
+        task.style.display = isCompleted ? "flex" : "none";
+      }
+      if (filterValue === "undone") {
+        task.style.display = isCompleted ? "none" : "flex";
       }
     });
   }
