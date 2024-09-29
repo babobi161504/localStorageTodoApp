@@ -25,20 +25,20 @@ document
       users.push({ username: username, password: password, userId: userId });
       localStorage.setItem("users", JSON.stringify(users));
       alert("User registered successfully!");
-      window.location.href = "../HTML/signIn.html";
+      window.location.href = "../page/signIn.html";
     }
   });
 document
   .getElementById("sign-in-button")
   .addEventListener("click", function () {
-    window.location.href = "../HTML/signIn.html";
+    window.location.href = "../page/signIn.html";
   });
 function checkLoggedIn() {
   if (
     localStorage.getItem("rememberMe") === "true" ||
     sessionStorage.getItem("currentUser")
   ) {
-    window.location.href = "../HTML/main.html";
+    window.location.href = "../page/main.html";
   }
 }
 checkLoggedIn();
