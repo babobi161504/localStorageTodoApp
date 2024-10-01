@@ -3,7 +3,7 @@ function checkLoggedIn() {
     localStorage.getItem("currentUser") ||
     sessionStorage.getItem("currentUser");
   if (!userJson) {
-    window.location.href = "../page/signIn.html";
+    window.location.href = "../pages/signIn.html";
   } else {
     const user = JSON.parse(userJson);
     document.getElementById(
@@ -16,7 +16,7 @@ document.getElementById("logout-button").addEventListener("click", function () {
   localStorage.removeItem("currentUser");
   sessionStorage.removeItem("currentUser");
   localStorage.removeItem("rememberMe");
-  window.location.href = "../page/signIn.html";
+  window.location.href = "../pages/signIn.html";
 });
 
 checkLoggedIn();
