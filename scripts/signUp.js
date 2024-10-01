@@ -9,7 +9,7 @@ document
     function generateUserId() {
       return (
         username +
-        "_"+
+        "_" +
         Date.now() +
         "_" +
         Math.random().toString(36).substring(2, 15)
@@ -25,20 +25,17 @@ document
       users.push({ username: username, password: password, userId: userId });
       localStorage.setItem("users", JSON.stringify(users));
       alert("User registered successfully!");
-      window.location.href = "../page/signIn.html";
+      window.location.href = "../pages/signIn.html";
     }
   });
 document
   .getElementById("sign-in-button")
   .addEventListener("click", function () {
-    window.location.href = "../page/signIn.html";
+    window.location.href = "../pages/signIn.html";
   });
 function checkLoggedIn() {
-  if (
-    localStorage.getItem("rememberMe") === "true" ||
-    sessionStorage.getItem("currentUser")
-  ) {
-    window.location.href = "../page/main.html";
+  if (localStorage.getItem("currentUser") || sessionStorage.getItem("currentUser")) {
+    window.location.href = "../pages/main.html";
   }
 }
 checkLoggedIn();
